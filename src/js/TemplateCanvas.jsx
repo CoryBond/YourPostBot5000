@@ -63,31 +63,27 @@ class TemplateCanvas extends React.Component
     });
   }
 
-  render() {
+  componentDidUpdate(){
+    const tccontext = this.refs.canvas.getContext('2d');
     let baseImage = this.state.baseImage;
     if (baseImage) {
-      var baseImage2 = new Image();
-      var that = this;
-      baseImage2.onload = function(){
-        if (!that.canvas.getContext) {
-          alert('Error: Canvas context does not exist!');
-          return;
-        } else{
-          var tccontext = that.canvas.getContext('webgl');
-          tcccontext.drawImage(baseImage2, 20, 20, 100, 100);
-        }
+      var contextImage = new Image();
+      contextImage.onload = function(){
+        tccontext.drawImage(contextImage, 0, 0, 1000, 1000);
       }
 
-      baseImage2.src = 'http://www.myhappybirthdaywishes.com/wp-content/uploads/2016/03/happy-birthday-dog-funny-memes.jpg';
+      contextImage.src = baseImage;
     }
+  }
 
+  render() {
     return (
       <div>
         <div className="ImageUpload">
           <ImageUpload setImage={this.setBaseImage}/>
         </div>
         <p>Canvas:</p>
-        <canvas width="500" height="500" ref={canvasRef => this.canvas = canvasRef}>
+        <canvas ref="canvas" width="500" height="500">
           Your browser does not support the HTML5 canvas tag.
         </canvas>
       </div>
