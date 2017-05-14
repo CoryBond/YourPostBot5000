@@ -1,3 +1,10 @@
+'use strict';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import ReactRouter from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+
 class ImageUpload extends React.Component
 {
   constructor(props) {
